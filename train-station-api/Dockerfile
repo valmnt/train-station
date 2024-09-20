@@ -1,6 +1,7 @@
 FROM node:20
-WORKDIR /api
-COPY package.json /api
+WORKDIR /src
+COPY package.json /src
 RUN npm install
-COPY . /api
-CMD ["node","index.js"]
+COPY . /src
+RUN npx tsc
+CMD ["node","./dist/app.js"]
