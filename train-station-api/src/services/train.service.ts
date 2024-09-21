@@ -42,27 +42,23 @@ class TrainService {
     }
 
     async fetchTrainsByDestination(destination: string): Promise<Array<Train>> {
-        return await this.trainRepository.findAll({ where: { destination: destination } })
+        return await this.trainRepository.findAll({ where: { destination: { [Op.iLike]: `%${destination}%` } } })
     }
 
     async fetchTrainById(id: string): Promise<Train | null> {
         return await this.trainRepository.findOne({ where: { id: id } })
     }
 
-    async fetchTrainsByTime(hour: number): Promise<Array<Train>> {
+    async fetchTrainsByTime(date: string): Promise<Array<Train>> {
         return await this.trainRepository.findAll({ where: {
-            [Op.and]: [
-                sequelize.where(fn('EXTRACT', fn('HOUR FROM', col('departureTime'))), hour)
-            ]
+            departureTime: date
         } })
     }
 
-    async fetchTrainsByDestinationAndTime(destination: string, hour: number): Promise<Array<Train>> {
+    async fetchTrainsByDestinationAndTime(destination: string, date: string): Promise<Array<Train>> {
         return await this.trainRepository.findAll({ where: {
-            destination: destination,
-            [Op.and]: [
-                sequelize.where(fn('EXTRACT', fn('HOUR FROM', col('departureTime'))), hour)
-            ]
+            destination: { [Op.iLike]: `%${destination}%` },
+            departureTime: date
         } })
     }
 

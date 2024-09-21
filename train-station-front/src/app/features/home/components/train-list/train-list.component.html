@@ -1,0 +1,27 @@
+<div class="container mt-5" *ngIf="trains.length > 0">
+  <table class="table table-striped table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Departure Time</th>
+        <th>Destination</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (train of trains; track train) {
+        <tr>
+          <td>{{ train.id }}</td>
+          <td>{{ train.departureTime }}</td>
+          <td>{{ train.destination }}</td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="removeTrain(train.id)">
+              Remove
+            </button>          
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<p *ngIf="trains.length == 0">There is no train.</p>

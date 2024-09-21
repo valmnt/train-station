@@ -1,6 +1,14 @@
 version: '3.8'
 
 services:
+  app:
+      build: ./train-station-front
+      restart: unless-stopped
+      ports:
+        - '$ANGULAR_LOCAL_PORT:$ANGULAR_DOCKER_PORT'
+      stdin_open: true
+      tty: true
+
   api:
     build: ./train-station-api
     restart: unless-stopped

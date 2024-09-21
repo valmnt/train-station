@@ -5,6 +5,7 @@ import trainRoute from './routes/train.route';
 import sequelize from './configs/database';
 
 const app: Application = express();
+const cors = require('cors');
 const PORT = process.env.NODE_LOCAL_PORT;
 
 database.authenticate()
@@ -12,6 +13,7 @@ database.authenticate()
     console.log('Successfully connected to the database.');
 
     await sequelize.sync();
+    app.use(cors());
     app.use(express.json());
     app.use('/destination', destinationRoute);
     app.use('/train', trainRoute);

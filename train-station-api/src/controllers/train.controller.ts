@@ -24,7 +24,7 @@ class TrainController {
                 return;
             }
 
-            const regex = /\b\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z\b/
+            const regex = /\b\d{4}-\d{2}-\d{2}T\d{2}:\d{2}\b/
             if (!body.departureTime.match(regex)) {
                 res.status(422).json({ error: 'departureTime is not correct.' });
                 return;
@@ -81,21 +81,21 @@ class TrainController {
     async fetchTrainByDestinationAndTime(req: Request, res: Response) {
         try {
             const destination = req.query.destination as string;
-            const hour = req.query.hour as string;
+            const date = req.query.date as string;
     
-            if (!destination && !hour) {
-                res.status(400).json({ error: 'destination and time are required.' });
+            if (!destination && !date) {
+                res.status(400).json({ error: 'destination and/or date are required.' });
                 return;
             }
     
-            if (destination && hour) {
-                const trains = await this.trainService.fetchTrainsByDestinationAndTime(destination, +hour);
+            if (destination && date) {
+                const trains = await this.trainService.fetchTrainsByDestinationAndTime(destination, date);
                 res.status(200).json(trains);
                 return;
             }
     
-            if (hour) {
-                const trains = await this.trainService.fetchTrainsByTime(+hour);
+            if (date) {
+                const trains = await this.trainService.fetchTrainsByTime(date);
                 res.status(200).json(trains);
                 return;
             }

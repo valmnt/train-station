@@ -1,0 +1,21 @@
+<div id="container">
+  <div style="width: 30%;">
+    <label>Code station</label>
+    <input id="destination" type="text" class="form-control" placeholder="Example" [(ngModel)]="destination" />
+
+    <br />
+
+    <label for="datetime">Departure Time:</label>
+    <input id="departure" class="form-control" type="datetime-local" [(ngModel)]="departure" />
+  
+    <br />
+
+    <label for="datetime">Arrival Time:</label>
+    <input id="arrival" class="form-control" type="datetime-local" [(ngModel)]="arrival" />
+    
+    <br />
+
+    <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+  </div>
+</div>
+  

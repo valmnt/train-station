@@ -1,0 +1,8 @@
+<div>
+  <h2 id="title" class="mb-4">Trains 🚂</h2>
+  <div id="filters">
+    <input class="form-control" type="datetime-local" placeholder="Departure time" [(ngModel)]="date" (ngModelChange)="onDateChange($event)">
+    <input class="form-control" type="text" placeholder="Code station" [(ngModel)]="destination" (ngModelChange)="onDestinationChange($event)">
+  </div>
+  <app-train-list [trains]="trains" (removeTrainEmitter)="removeTrain($event)"></app-train-list>
+</div>
