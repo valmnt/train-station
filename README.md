@@ -6,7 +6,7 @@
 - FRONT: Angular
 - OTHERS: Docker, Docker Compose
 
-# Difficultés rencontrés
+# Difficultés rencontrées
 
 - Le faible typage de JS
 - L'architecture du projet ExpressJS et Angular
